@@ -1,0 +1,1020 @@
+# CSO – CALLED TO SERVE OTHERS
+## Modern Christian Organization Website & Management System
+
+### 1. Project Overview
+
+Develop a modern, professional, responsive, and user-friendly website for a Christian organization called **CSO (Called to Serve Others)**, based in Rwanda.
+
+The organization's main purpose is to serve God by helping people through community service, Christian activities, charity, prayer, and spreading the Word of God.
+
+**Organization Motto:**
+"Serving God by Helping People."
+
+The website should present the organization's identity, mission, vision, activities, events, projects, and achievements. It should also allow visitors to contact the organization, become volunteers, participate in events, and support community activities.
+
+The system must include a public website and an administrative dashboard for managing the organization's information and activities.
+
+---
+
+### 2. Project Objectives
+
+- Promote CSO and its Christian mission online.
+- Share information about the organization's activities.
+- Publish upcoming events and announcements.
+- Showcase community service activities through photographs.
+- Allow people to register as volunteers.
+- Allow visitors to contact the organization.
+- Manage volunteers, events, activities, and messages.
+- Provide an easy-to-use administration dashboard.
+- Improve communication between CSO and the community.
+
+---
+
+### 3. Technology Stack
+
+**Frontend**
+- React.js
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Axios
+- Lucide React Icons
+
+**Backend**
+- Node.js
+- Express.js
+- REST API
+- JWT Authentication
+- bcrypt.js for password hashing
+- dotenv for environment variables
+- Multer for image uploads
+
+**Database**
+- MySQL
+- MySQL2 Node.js package
+
+**Development and Deployment**
+- Visual Studio Code
+- Git and GitHub
+- Vercel for frontend deployment
+- Render or another Node.js hosting provider for backend
+- MySQL-compatible hosted database
+
+---
+
+### 4. Website Pages and Their Elements
+
+#### A. Home Page
+
+Create an attractive landing page that introduces CSO.
+
+Required elements:
+- Responsive navigation bar.
+- CSO logo and organization name.
+- Hero section with a large background image.
+- Organization motto: "Serving God by Helping People."
+- Short introduction about CSO.
+- Call-to-action buttons: Learn More, Join Us.
+- Mission and Vision preview.
+- Featured activities.
+- Latest events.
+- Community impact section.
+- Gallery preview.
+- Volunteer registration call-to-action.
+- Footer with contact information and social media links.
+
+#### B. About Us Page
+
+Explain the identity and purpose of CSO.
+
+Required elements:
+- Organization background and introduction.
+- History of the organization.
+- Mission statement.
+- Vision statement.
+- Core values:
+  - Faith
+  - Love
+  - Compassion
+  - Unity
+  - Service
+- Leadership and team members.
+- Organization goals.
+
+#### C. Our Activities Page
+
+Display all community and Christian activities organized by CSO.
+
+Activity categories:
+1. Visiting sick people in hospitals.
+2. Helping vulnerable and disadvantaged people.
+3. Visiting and supporting children.
+4. Organizing prayer meetings.
+5. Teaching the Word of God.
+6. Charity and community service.
+
+Required elements:
+- Activity cards.
+- Activity photographs.
+- Activity descriptions.
+- Activity dates and locations.
+- View Details buttons.
+- Search and category filters.
+
+#### D. Events Page
+
+Display upcoming and previous CSO events.
+
+Required elements:
+- Upcoming events.
+- Past events.
+- Event images.
+- Event title and description.
+- Event date and location.
+- Event details page.
+- Event registration functionality.
+
+#### E. Gallery Page
+
+Show photographs and videos of CSO activities.
+
+Required elements:
+- Image gallery.
+- Video gallery.
+- Category filters.
+- Image preview/lightbox.
+- Responsive image grid.
+
+#### F. Get Involved Page
+
+Encourage people to participate in CSO activities.
+
+Required elements:
+- Become a volunteer section.
+- Volunteer registration form.
+- Ways to support CSO.
+- Community participation information.
+- Prayer support information.
+- Donation information, if officially supported by the organization.
+
+Volunteer form fields:
+- Full name.
+- Email address.
+- Phone number.
+- Gender (optional).
+- Location.
+- Skills or interests.
+- Reason for volunteering.
+
+#### G. Contact Us Page
+
+Allow visitors to communicate with the organization.
+
+Required elements:
+- Contact form.
+- Email address.
+- Official phone number.
+- Organization location.
+- Google Maps integration when the official address is available.
+- Social media links.
+
+Contact form fields:
+- Full name.
+- Email address.
+- Subject.
+- Message.
+
+#### H. Authentication Pages
+
+Create secure authentication pages for authorized system users.
+
+**Login Page**
+- Email address.
+- Password.
+- Remember me option.
+- Forgot password link.
+- Login button.
+
+**Registration Page**
+- Full name.
+- Email address.
+- Phone number.
+- Password.
+- Confirm password.
+
+Implement role-based access for:
+- Administrator.
+- Authorized staff or content managers.
+- Volunteers (where appropriate).
+
+Public visitors should not automatically receive administrative permissions.
+
+---
+
+### 5. Admin Dashboard
+
+Create a professional and secure dashboard for managing the CSO website.
+
+Dashboard layout:
+- Sidebar navigation.
+- Top navigation bar.
+- Admin profile.
+- Notification area.
+- Dashboard statistics.
+- Main content area.
+
+**Dashboard Overview**
+Display:
+- Total volunteers.
+- Total activities.
+- Total events.
+- Total contact messages.
+- Recent registrations.
+- Recent activities.
+
+**Manage Activities**
+- Add new activities.
+- Edit activities.
+- Delete activities.
+- Upload activity images.
+- View activity details.
+
+**Manage Events**
+- Create events.
+- Update events.
+- Delete events.
+- Manage event registrations.
+- Mark events as completed.
+
+**Manage Volunteers**
+- View volunteer applications.
+- Approve or reject applications.
+- Edit volunteer information.
+- Delete volunteer records.
+- Search and filter volunteers.
+
+**Manage Gallery**
+- Upload images.
+- Add image descriptions.
+- Organize images into categories.
+- Delete images.
+
+**Manage Messages**
+- View contact messages.
+- Read messages.
+- Mark messages as read.
+- Delete messages.
+
+**Manage Users**
+- Create admin accounts.
+- Manage user roles.
+- Activate or deactivate accounts.
+- Update account information.
+
+---
+
+### 6. MySQL Database Design
+
+Create a relational MySQL database named:
+
+`cso_database`
+
+Required tables:
+
+1. `users`
+   - id
+   - full_name
+   - email
+   - password
+   - phone
+   - role
+   - created_at
+
+2. `volunteers`
+   - id
+   - full_name
+   - email
+   - phone
+   - location
+   - skills
+   - motivation
+   - status
+   - created_at
+
+3. `activities`
+   - id
+   - title
+   - description
+   - category
+   - image
+   - activity_date
+   - location
+   - created_at
+
+4. `events`
+   - id
+   - title
+   - description
+   - event_date
+   - location
+   - image
+   - status
+   - created_at
+
+5. `event_registrations`
+   - id
+   - event_id
+   - volunteer_id
+   - registration_date
+   - status
+
+6. `gallery`
+   - id
+   - title
+   - description
+   - image_url
+   - category
+   - created_at
+
+7. `messages`
+   - id
+   - full_name
+   - email
+   - subject
+   - message
+   - status
+   - created_at
+
+Use primary keys, foreign keys, indexes, and appropriate relationships between tables.
+
+---
+
+### 7. Backend API Development
+
+Create a RESTful API using Node.js and Express.js.
+
+Required API modules:
+
+- Authentication API.
+- Users API.
+- Activities API.
+- Events API.
+- Volunteers API.
+- Event registrations API.
+- Gallery API.
+- Contact messages API.
+
+Example API endpoints:
+
+Authentication:
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/auth/profile
+
+Activities:
+- GET /api/activities
+- GET /api/activities/:id
+- POST /api/activities
+- PUT /api/activities/:id
+- DELETE /api/activities/:id
+
+Events:
+- GET /api/events
+- POST /api/events
+- PUT /api/events/:id
+- DELETE /api/events/:id
+
+Volunteers:
+- POST /api/volunteers
+- GET /api/volunteers
+- PUT /api/volunteers/:id
+- DELETE /api/volunteers/:id
+
+Messages:
+- POST /api/messages
+- GET /api/messages
+- DELETE /api/messages/:id
+
+Protect administrative endpoints with JWT authentication and role-based authorization.
+
+---
+
+### 8. UI/UX Design Requirements
+
+Create a modern Christian organization design.
+
+Color palette:
+- Primary: Dark Green (#14532D).
+- Secondary: Light Green (#DCFCE7).
+- Background: White (#FFFFFF).
+- Accent: Gold (#D4AF37).
+- Text: Dark Gray (#1F2937).
+
+Design requirements:
+- Modern and clean interface.
+- Professional typography.
+- Beautiful hero sections.
+- High-quality community photography.
+- Rounded cards and buttons.
+- Smooth animations and transitions.
+- Consistent spacing and alignment.
+- Responsive mobile-first design.
+- Accessible navigation.
+- Light and dark mode (optional).
+
+The website must work correctly on:
+- Desktop computers.
+- Tablets.
+- Mobile phones.
+
+---
+
+### 9. Project Folder Structure
+
+Organize the project into two main folders:
+
+CSO-WEBSITE/
+- client/
+  - src/
+    - assets/
+    - components/
+    - pages/
+    - sections/
+    - layouts/
+    - hooks/
+    - services/
+    - context/
+    - App.jsx
+    - main.jsx
+- server/
+  - src/
+    - config/
+    - controllers/
+    - middleware/
+    - models/
+    - routes/
+    - services/
+    - uploads/
+    - app.js
+    - server.js
+  - .env
+- database/
+  - cso_database.sql
+- README.md
+
+---
+
+### 10. Security Requirements
+
+- Hash passwords using bcrypt.
+- Use JWT for authentication.
+- Implement role-based access control.
+- Validate and sanitize user inputs.
+- Use environment variables for credentials.
+- Protect private API routes.
+- Validate image uploads.
+- Use parameterized MySQL queries.
+- Apply appropriate CORS configuration.
+- Never expose database passwords or JWT secrets in frontend code.
+
+---
+
+### 11. Final Expected Result
+
+Deliver a complete, modern, responsive, and functional CSO website with:
+
+1. Public-facing organizational website.
+2. Secure authentication system.
+3. Volunteer registration system.
+4. Activities and events management.
+5. Gallery management.
+6. Contact messaging system.
+7. MySQL database integration.
+8. Node.js and Express REST API.
+9. Secure administrator dashboard.
+10. Responsive UI/UX design.
+
+### Important Development Instructions
+
+Build the project step by step.
+
+First, initialize the React frontend using Vite and configure Tailwind CSS. Then develop the homepage and public pages.
+
+After completing the frontend, create the Node.js and Express backend, configure MySQL, develop REST APIs, and connect the frontend to the backend using Axios.
+
+Finally, implement authentication, dashboard management, testing, security, and deployment.
+
+Use reusable React components, clean code, proper folder organization, and professional development practices.
+
+Do not invent official CSO contact details, leadership names, historical information, statistics, or achievements. Use placeholders until the organization provides verified information.
+
+// other descript combine
+# CSO – CALLED TO SERVE OTHERS
+## Modern Christian Organization Website & Management System
+
+### 1. Project Overview
+
+Develop a modern, professional, responsive, and user-friendly website for a Christian organization called **CSO (Called to Serve Others)**, based in Rwanda.
+
+The organization's main purpose is to serve God by helping people through community service, Christian activities, charity, prayer, and spreading the Word of God.
+
+**Organization Motto:**
+"Serving God by Helping People."
+
+The website should present the organization's identity, mission, vision, activities, events, projects, and achievements. It should also allow visitors to contact the organization, become volunteers, participate in events, and support community activities.
+
+The system must include a public website and an administrative dashboard for managing the organization's information and activities.
+
+---
+
+### 2. Project Objectives
+
+- Promote CSO and its Christian mission online.
+- Share information about the organization's activities.
+- Publish upcoming events and announcements.
+- Showcase community service activities through photographs.
+- Allow people to register as volunteers.
+- Allow visitors to contact the organization.
+- Manage volunteers, events, activities, and messages.
+- Provide an easy-to-use administration dashboard.
+- Improve communication between CSO and the community.
+
+---
+
+### 3. Technology Stack
+
+**Frontend**
+- React.js
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Axios
+- Lucide React Icons
+
+**Backend**
+- Node.js
+- Express.js
+- REST API
+- JWT Authentication
+- bcrypt.js for password hashing
+- dotenv for environment variables
+- Multer for image uploads
+
+**Database**
+- MySQL
+- MySQL2 Node.js package
+
+**Development and Deployment**
+- Visual Studio Code
+- Git and GitHub
+- Vercel for frontend deployment
+- Render or another Node.js hosting provider for backend
+- MySQL-compatible hosted database
+
+---
+
+### 4. Website Pages and Their Elements
+
+#### A. Home Page
+
+Create an attractive landing page that introduces CSO.
+
+Required elements:
+- Responsive navigation bar.
+- CSO logo and organization name.
+- Hero section with a large background image.
+- Organization motto: "Serving God by Helping People."
+- Short introduction about CSO.
+- Call-to-action buttons: Learn More, Join Us.
+- Mission and Vision preview.
+- Featured activities.
+- Latest events.
+- Community impact section.
+- Gallery preview.
+- Volunteer registration call-to-action.
+- Footer with contact information and social media links.
+
+#### B. About Us Page
+
+Explain the identity and purpose of CSO.
+
+Required elements:
+- Organization background and introduction.
+- History of the organization.
+- Mission statement.
+- Vision statement.
+- Core values:
+  - Faith
+  - Love
+  - Compassion
+  - Unity
+  - Service
+- Leadership and team members.
+- Organization goals.
+
+#### C. Our Activities Page
+
+Display all community and Christian activities organized by CSO.
+
+Activity categories:
+1. Visiting sick people in hospitals.
+2. Helping vulnerable and disadvantaged people.
+3. Visiting and supporting children.
+4. Organizing prayer meetings.
+5. Teaching the Word of God.
+6. Charity and community service.
+
+Required elements:
+- Activity cards.
+- Activity photographs.
+- Activity descriptions.
+- Activity dates and locations.
+- View Details buttons.
+- Search and category filters.
+
+#### D. Events Page
+
+Display upcoming and previous CSO events.
+
+Required elements:
+- Upcoming events.
+- Past events.
+- Event images.
+- Event title and description.
+- Event date and location.
+- Event details page.
+- Event registration functionality.
+
+#### E. Gallery Page
+
+Show photographs and videos of CSO activities.
+
+Required elements:
+- Image gallery.
+- Video gallery.
+- Category filters.
+- Image preview/lightbox.
+- Responsive image grid.
+
+#### F. Get Involved Page
+
+Encourage people to participate in CSO activities.
+
+Required elements:
+- Become a volunteer section.
+- Volunteer registration form.
+- Ways to support CSO.
+- Community participation information.
+- Prayer support information.
+- Donation information, if officially supported by the organization.
+
+Volunteer form fields:
+- Full name.
+- Email address.
+- Phone number.
+- Gender (optional).
+- Location.
+- Skills or interests.
+- Reason for volunteering.
+
+#### G. Contact Us Page
+
+Allow visitors to communicate with the organization.
+
+Required elements:
+- Contact form.
+- Email address.
+- Official phone number.
+- Organization location.
+- Google Maps integration when the official address is available.
+- Social media links.
+
+Contact form fields:
+- Full name.
+- Email address.
+- Subject.
+- Message.
+
+#### H. Authentication Pages
+
+Create secure authentication pages for authorized system users.
+
+**Login Page**
+- Email address.
+- Password.
+- Remember me option.
+- Forgot password link.
+- Login button.
+
+**Registration Page**
+- Full name.
+- Email address.
+- Phone number.
+- Password.
+- Confirm password.
+
+Implement role-based access for:
+- Administrator.
+- Authorized staff or content managers.
+- Volunteers (where appropriate).
+
+Public visitors should not automatically receive administrative permissions.
+
+---
+
+### 5. Admin Dashboard
+
+Create a professional and secure dashboard for managing the CSO website.
+
+Dashboard layout:
+- Sidebar navigation.
+- Top navigation bar.
+- Admin profile.
+- Notification area.
+- Dashboard statistics.
+- Main content area.
+
+**Dashboard Overview**
+Display:
+- Total volunteers.
+- Total activities.
+- Total events.
+- Total contact messages.
+- Recent registrations.
+- Recent activities.
+
+**Manage Activities**
+- Add new activities.
+- Edit activities.
+- Delete activities.
+- Upload activity images.
+- View activity details.
+
+**Manage Events**
+- Create events.
+- Update events.
+- Delete events.
+- Manage event registrations.
+- Mark events as completed.
+
+**Manage Volunteers**
+- View volunteer applications.
+- Approve or reject applications.
+- Edit volunteer information.
+- Delete volunteer records.
+- Search and filter volunteers.
+
+**Manage Gallery**
+- Upload images.
+- Add image descriptions.
+- Organize images into categories.
+- Delete images.
+
+**Manage Messages**
+- View contact messages.
+- Read messages.
+- Mark messages as read.
+- Delete messages.
+
+**Manage Users**
+- Create admin accounts.
+- Manage user roles.
+- Activate or deactivate accounts.
+- Update account information.
+
+---
+
+### 6. MySQL Database Design
+
+Create a relational MySQL database named:
+
+`cso_database`
+
+Required tables:
+
+1. `users`
+   - id
+   - full_name
+   - email
+   - password
+   - phone
+   - role
+   - created_at
+
+2. `volunteers`
+   - id
+   - full_name
+   - email
+   - phone
+   - location
+   - skills
+   - motivation
+   - status
+   - created_at
+
+3. `activities`
+   - id
+   - title
+   - description
+   - category
+   - image
+   - activity_date
+   - location
+   - created_at
+
+4. `events`
+   - id
+   - title
+   - description
+   - event_date
+   - location
+   - image
+   - status
+   - created_at
+
+5. `event_registrations`
+   - id
+   - event_id
+   - volunteer_id
+   - registration_date
+   - status
+
+6. `gallery`
+   - id
+   - title
+   - description
+   - image_url
+   - category
+   - created_at
+
+7. `messages`
+   - id
+   - full_name
+   - email
+   - subject
+   - message
+   - status
+   - created_at
+
+Use primary keys, foreign keys, indexes, and appropriate relationships between tables.
+
+---
+
+### 7. Backend API Development
+
+Create a RESTful API using Node.js and Express.js.
+
+Required API modules:
+
+- Authentication API.
+- Users API.
+- Activities API.
+- Events API.
+- Volunteers API.
+- Event registrations API.
+- Gallery API.
+- Contact messages API.
+
+Example API endpoints:
+
+Authentication:
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/auth/profile
+
+Activities:
+- GET /api/activities
+- GET /api/activities/:id
+- POST /api/activities
+- PUT /api/activities/:id
+- DELETE /api/activities/:id
+
+Events:
+- GET /api/events
+- POST /api/events
+- PUT /api/events/:id
+- DELETE /api/events/:id
+
+Volunteers:
+- POST /api/volunteers
+- GET /api/volunteers
+- PUT /api/volunteers/:id
+- DELETE /api/volunteers/:id
+
+Messages:
+- POST /api/messages
+- GET /api/messages
+- DELETE /api/messages/:id
+
+Protect administrative endpoints with JWT authentication and role-based authorization.
+
+---
+
+### 8. UI/UX Design Requirements
+
+Create a modern Christian organization design.
+
+Color palette:
+- Primary: Dark Green (#14532D).
+- Secondary: Light Green (#DCFCE7).
+- Background: White (#FFFFFF).
+- Accent: Gold (#D4AF37).
+- Text: Dark Gray (#1F2937).
+
+Design requirements:
+- Modern and clean interface.
+- Professional typography.
+- Beautiful hero sections.
+- High-quality community photography.
+- Rounded cards and buttons.
+- Smooth animations and transitions.
+- Consistent spacing and alignment.
+- Responsive mobile-first design.
+- Accessible navigation.
+- Light and dark mode (optional).
+
+The website must work correctly on:
+- Desktop computers.
+- Tablets.
+- Mobile phones.
+
+---
+
+### 9. Project Folder Structure
+
+Organize the project into two main folders:
+
+CSO-WEBSITE/
+- client/
+  - src/
+    - assets/
+    - components/
+    - pages/
+    - sections/
+    - layouts/
+    - hooks/
+    - services/
+    - context/
+    - App.jsx
+    - main.jsx
+- server/
+  - src/
+    - config/
+    - controllers/
+    - middleware/
+    - models/
+    - routes/
+    - services/
+    - uploads/
+    - app.js
+    - server.js
+  - .env
+- database/
+  - cso_database.sql
+- README.md
+
+---
+
+### 10. Security Requirements
+
+- Hash passwords using bcrypt.
+- Use JWT for authentication.
+- Implement role-based access control.
+- Validate and sanitize user inputs.
+- Use environment variables for credentials.
+- Protect private API routes.
+- Validate image uploads.
+- Use parameterized MySQL queries.
+- Apply appropriate CORS configuration.
+- Never expose database passwords or JWT secrets in frontend code.
+
+---
+
+### 11. Final Expected Result
+
+Deliver a complete, modern, responsive, and functional CSO website with:
+
+1. Public-facing organizational website.
+2. Secure authentication system.
+3. Volunteer registration system.
+4. Activities and events management.
+5. Gallery management.
+6. Contact messaging system.
+7. MySQL database integration.
+8. Node.js and Express REST API.
+9. Secure administrator dashboard.
+10. Responsive UI/UX design.
+
+### Important Development Instructions
+
+Build the project step by step.
+
+First, initialize the React frontend using Vite and configure Tailwind CSS. Then develop the homepage and public pages.
+
+After completing the frontend, create the Node.js and Express backend, configure MySQL, develop REST APIs, and connect the frontend to the backend using Axios.
+
+Finally, implement authentication, dashboard management, testing, security, and deployment.
+
+Use reusable React components, clean code, proper folder organization, and professional development practices.
+
+Do not invent official CSO contact details, leadership names, historical information, statistics, or achievements. Use placeholders until the organization provides verified information.

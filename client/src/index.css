@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[radial-gradient(circle_at_top,_rgba(220,252,231,0.85),_rgba(255,255,255,0.98)_35%,_rgba(248,250,252,1)_100%)] font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-primary-950;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading text-primary-950;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2;
+  }
+}
+
+@layer components {
+  .container-cso {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-tight {
+    @apply py-12 sm:py-16;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-700;
+  }
+
+  .display-title {
+    @apply font-heading text-3xl leading-tight text-primary-950 sm:text-4xl lg:text-5xl;
+    text-shadow: 0 10px 30px rgba(20, 83, 45, 0.08);
+  }
+
+  .body-muted {
+    @apply text-base leading-relaxed text-slate-600;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white shadow-soft hover:-translate-y-0.5 hover:bg-primary-800 hover:shadow-[0_16px_40px_-18px_rgba(20,83,45,0.72)];
+  }
+
+  .btn-accent {
+    @apply btn bg-accent text-primary-950 shadow-soft hover:-translate-y-0.5 hover:bg-accent-light hover:shadow-[0_16px_42px_-18px_rgba(212,175,55,0.7)];
+  }
+
+  .btn-outline {
+    @apply btn border border-primary/25 bg-white/80 text-primary-900 backdrop-blur-sm hover:border-primary hover:bg-secondary;
+  }
+
+  .btn-ghost {
+    @apply btn text-primary-900 hover:bg-secondary/80;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-xs;
+  }
+
+  .card {
+    @apply rounded-[28px] border border-emerald-100/80 bg-white/90 shadow-card backdrop-blur-sm;
+  }
+
+  .card-hover {
+    @apply transition duration-300 hover:-translate-y-1 hover:shadow-soft;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-ink placeholder:text-slate-400 transition focus:border-primary focus:ring-2 focus:ring-primary/15;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-slate-700;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .badge-green {
+    @apply badge bg-secondary text-primary-800;
+  }
+
+  .badge-gold {
+    @apply badge bg-accent/15 text-accent-dark;
+  }
+
+  .badge-gray {
+    @apply badge bg-slate-100 text-slate-600;
+  }
+
+  .badge-red {
+    @apply badge bg-red-50 text-red-700;
+  }
+
+  .badge-blue {
+    @apply badge bg-blue-50 text-blue-700;
+  }
+
+  .admin-card {
+    @apply rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm;
+  }
+
+  .table-wrap {
+    @apply overflow-x-auto rounded-2xl border border-slate-200 bg-white/90;
+  }
+
+  .data-table {
+    @apply w-full min-w-[640px] text-left text-sm;
+  }
+
+  .data-table thead {
+    @apply bg-slate-50 text-xs uppercase tracking-wider text-slate-500;
+  }
+
+  .data-table th {
+    @apply px-4 py-3 font-semibold;
+  }
+
+  .data-table td {
+    @apply border-t border-slate-100 px-4 py-3 align-middle;
+  }
+
+  .data-table tbody tr {
+    @apply transition hover:bg-emerald-50/70;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-hero-pattern {
+    background-image:
+      linear-gradient(115deg, rgba(5, 46, 22, 0.88) 0%, rgba(20, 83, 45, 0.78) 42%, rgba(9, 73, 52, 0.55) 100%),
+      url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1920&q=85");
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0 0 40px rgba(6, 78, 59, 0.2);
+  }
+}

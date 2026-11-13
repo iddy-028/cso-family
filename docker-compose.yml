@@ -1,0 +1,23 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: cso-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cso_database
+      MYSQL_USER: cso_user
+      MYSQL_PASSWORD: cso_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - cso_mysql_data:/var/lib/mysql
+      - ./database/cso_database.sql:/docker-entrypoint-initdb.d/01-cso_database.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  cso_mysql_data:
