@@ -1,13 +1,15 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { useState } from "react";
 import { Expand } from "lucide-react";
 import { resolveImage } from "../services/api";
 import Lightbox from "./Lightbox";
 
 export default function GalleryGrid({ items = [] }) {
+  const translationLanguage = useTranslationLanguage().language;
   const [activeIndex, setActiveIndex] = useState(-1);
 
   return (
-    <>
+    translateNode(<>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, index) => (
           <button
@@ -38,6 +40,6 @@ export default function GalleryGrid({ items = [] }) {
       {activeIndex >= 0 && (
         <Lightbox items={items} index={activeIndex} onChange={setActiveIndex} onClose={() => setActiveIndex(-1)} />
       )}
-    </>
+    </>, translationLanguage)
   );
 }

@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, CalendarDays, Clock, MapPin, Users } from "lucide-react";
@@ -14,6 +15,7 @@ import { formatDateTime } from "../utils/format";
 const initialForm = { full_name: "", email: "", phone: "" };
 
 export default function EventDetails() {
+  const translationLanguage = useTranslationLanguage().language;
   const { id } = useParams();
   const fallback = fallbackEvents.find((event) => String(event.id) === String(id)) || null;
   const { data: event, loading } = useApiData(() => publicApi.event(id), fallback, [id]);
@@ -43,11 +45,11 @@ export default function EventDetails() {
     }
   }
 
-  if (loading) return <Loader full label="Loading event…" />;
+  if (loading) return translateNode(<Loader full label="Loading event…" />, translationLanguage);
 
   if (!event) {
     return (
-      <div className="container-cso py-20">
+      translateNode(<div className="container-cso py-20">
         <EmptyState
           icon={CalendarDays}
           title="Event not found"
@@ -58,14 +60,14 @@ export default function EventDetails() {
             </Link>
           }
         />
-      </div>
+      </div>, translationLanguage)
     );
   }
 
   const isOpen = event.status === "upcoming";
 
   return (
-    <>
+    translateNode(<>
       <PageHero
         eyebrow={isOpen ? "Upcoming event" : "Past event"}
         title={event.title}
@@ -169,6 +171,6 @@ export default function EventDetails() {
           </aside>
         </div>
       </section>
-    </>
+    </>, translationLanguage)
   );
 }

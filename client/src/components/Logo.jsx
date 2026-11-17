@@ -1,8 +1,10 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { Link } from "react-router-dom";
 
 export default function Logo({ light = false, compact = false }) {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <Link to="/" className="group inline-flex items-center gap-3" aria-label="CSO home">
+    translateNode(<Link to="/" className="group inline-flex items-center gap-3" aria-label="CSO home">
       <img
         src="/logo.jpeg"
         alt=""
@@ -22,6 +24,6 @@ export default function Logo({ light = false, compact = false }) {
           </span>
         )}
       </span>
-    </Link>
+    </Link>, translationLanguage)
   );
 }

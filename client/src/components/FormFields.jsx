@@ -1,6 +1,8 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 export function TextField({ label, hint, className = "", ...props }) {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <div className={className}>
+    translateNode(<div className={className}>
       {label && (
         <label className="label" htmlFor={props.id || props.name}>
           {label}
@@ -9,13 +11,14 @@ export function TextField({ label, hint, className = "", ...props }) {
       )}
       <input className="input" {...props} />
       {hint && <p className="mt-1.5 text-xs text-slate-400">{hint}</p>}
-    </div>
+    </div>, translationLanguage)
   );
 }
 
 export function TextArea({ label, hint, className = "", rows = 4, ...props }) {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <div className={className}>
+    translateNode(<div className={className}>
       {label && (
         <label className="label" htmlFor={props.id || props.name}>
           {label}
@@ -24,13 +27,14 @@ export function TextArea({ label, hint, className = "", rows = 4, ...props }) {
       )}
       <textarea className="input resize-y" rows={rows} {...props} />
       {hint && <p className="mt-1.5 text-xs text-slate-400">{hint}</p>}
-    </div>
+    </div>, translationLanguage)
   );
 }
 
 export function SelectField({ label, options = [], className = "", children, ...props }) {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <div className={className}>
+    translateNode(<div className={className}>
       {label && (
         <label className="label" htmlFor={props.id || props.name}>
           {label}
@@ -49,6 +53,6 @@ export function SelectField({ label, options = [], className = "", children, ...
             );
           })}
       </select>
-    </div>
+    </div>, translationLanguage)
   );
 }

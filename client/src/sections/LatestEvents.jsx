@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import { publicApi } from "../services/api";
@@ -9,19 +10,20 @@ import Loader from "../components/Loader";
 import EmptyState from "../components/EmptyState";
 
 export default function LatestEvents() {
+  const translationLanguage = useTranslationLanguage().language;
   const { data: events, loading } = useApiData(
     () => publicApi.events({ status: "upcoming" }),
     fallbackEvents.filter((event) => event.status === "upcoming"),
   );
 
   return (
-    <section className="section bg-white">
+    translateNode(<section className="section bg-white">
       <div className="container-cso">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
-            eyebrow="Upcoming events"
-            title="Come and serve with us."
-            description="Prayer evenings, volunteer orientations, community outreach, and more. Everyone is welcome."
+            eyebrow="CSO Family events"
+            title="Official events"
+            description="Event details will appear here when published by CSO Family."
           />
           <Link to="/events" className="btn-outline shrink-0">
             All events <ArrowRight className="h-4 w-4" />
@@ -35,7 +37,7 @@ export default function LatestEvents() {
             <EmptyState
               icon={CalendarDays}
               title="No upcoming events yet"
-              description="Check back soon or get involved to hear about the next gathering."
+              description="Official CSO Family events will appear here when they are published."
               action={
                 <Link to="/get-involved" className="btn-primary">
                   Get Involved
@@ -51,6 +53,6 @@ export default function LatestEvents() {
           </div>
         )}
       </div>
-    </section>
+    </section>, translationLanguage)
   );
 }

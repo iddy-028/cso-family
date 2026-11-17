@@ -1,8 +1,10 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { useEffect } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { resolveImage } from "../services/api";
 
 export default function Lightbox({ items, index, onClose, onChange }) {
+  const translationLanguage = useTranslationLanguage().language;
   const item = items[index];
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export default function Lightbox({ items, index, onClose, onChange }) {
   if (!item) return null;
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-950/92 p-4 sm:p-8" role="dialog" aria-modal="true">
+    translateNode(<div className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-950/92 p-4 sm:p-8" role="dialog" aria-modal="true">
       <button
         type="button"
         onClick={onClose}
@@ -69,6 +71,6 @@ export default function Lightbox({ items, index, onClose, onChange }) {
           <ChevronRight className="h-6 w-6" />
         </button>
       )}
-    </div>
+    </div>, translationLanguage)
   );
 }

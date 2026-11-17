@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "./LanguageContext.jsx";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   authApi,
@@ -11,6 +12,7 @@ import {
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
+  const translationLanguage = useTranslationLanguage().language;
   const [user, setUser] = useState(() => getStoredUser());
   const [loading, setLoading] = useState(() => Boolean(getToken()));
 
@@ -81,7 +83,7 @@ export function AuthProvider({ children }) {
     [user, loading, login, logout],
   );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return translateNode(<AuthContext.Provider value={value}>{children}</AuthContext.Provider>, translationLanguage);
 }
 
 export function useAuth() {

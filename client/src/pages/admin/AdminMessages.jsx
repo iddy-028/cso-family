@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../../context/LanguageContext.jsx";
 import { useState } from "react";
 import { Mail, MailOpen, Search, Trash2 } from "lucide-react";
 import EmptyState from "../../components/EmptyState";
@@ -9,6 +10,7 @@ import { adminApi, getErrorMessage } from "../../services/api";
 import { formatDateTime } from "../../utils/format";
 
 export default function AdminMessages() {
+  const translationLanguage = useTranslationLanguage().language;
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   const { data, loading, error, refresh } = useApiData(
@@ -53,7 +55,7 @@ export default function AdminMessages() {
   }
 
   return (
-    <div className="space-y-5">
+    translateNode(<div className="space-y-5">
       <div>
         <h1 className="font-heading text-2xl text-primary-950">Contact messages</h1>
         <p className="mt-1 text-sm text-slate-500">Read and manage messages sent through the website contact form.</p>
@@ -177,6 +179,6 @@ export default function AdminMessages() {
           </div>
         )}
       </Modal>
-    </div>
+    </div>, translationLanguage)
   );
 }

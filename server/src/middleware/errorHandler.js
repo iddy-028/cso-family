@@ -15,7 +15,9 @@ export function errorHandler(error, req, res, next) {
 
   if (error.code === "LIMIT_FILE_SIZE") {
     status = 400;
-    message = "Image is too large. Maximum size is 5 MB.";
+    message = error.field === "video"
+      ? "Video is too large. Maximum size is 100 MB."
+      : "Image is too large. Maximum size is 5 MB.";
   }
 
   if (error.code === "ECONNREFUSED" || error.code === "PROTOCOL_CONNECTION_LOST") {

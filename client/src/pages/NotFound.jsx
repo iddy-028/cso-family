@@ -1,9 +1,11 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Home } from "lucide-react";
 
 export default function NotFound() {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <section className="section bg-slate-50">
+    translateNode(<section className="section bg-slate-50">
       <div className="container-cso">
         <div className="mx-auto max-w-xl rounded-3xl border border-slate-100 bg-white p-8 text-center shadow-card sm:p-12">
           <p className="font-heading text-6xl text-primary-950">404</p>
@@ -21,6 +23,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-    </section>
+    </section>, translationLanguage)
   );
 }

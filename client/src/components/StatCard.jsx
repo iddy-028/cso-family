@@ -1,4 +1,6 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 export default function StatCard({ label, value, hint, icon: Icon, tone = "green" }) {
+  const translationLanguage = useTranslationLanguage().language;
   const tones = {
     green: "bg-secondary text-primary-800",
     gold: "bg-accent/15 text-accent-dark",
@@ -7,7 +9,7 @@ export default function StatCard({ label, value, hint, icon: Icon, tone = "green
   };
 
   return (
-    <div className="admin-card flex items-start justify-between gap-4">
+    translateNode(<div className="admin-card flex items-start justify-between gap-4">
       <div>
         <p className="text-sm font-medium text-slate-500">{label}</p>
         <p className="mt-2 font-heading text-3xl text-primary-950">{value}</p>
@@ -18,6 +20,6 @@ export default function StatCard({ label, value, hint, icon: Icon, tone = "green
           <Icon className="h-6 w-6" />
         </span>
       )}
-    </div>
+    </div>, translationLanguage)
   );
 }

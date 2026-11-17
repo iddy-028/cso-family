@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import PageHero from "../components/PageHero";
@@ -10,6 +11,7 @@ import useApiData from "../hooks/useApiData";
 import { formatDate } from "../utils/format";
 
 export default function ActivityDetails() {
+  const translationLanguage = useTranslationLanguage().language;
   const { id } = useParams();
   const fallback = fallbackActivities.find((activity) => String(activity.id) === String(id)) || null;
 
@@ -19,11 +21,11 @@ export default function ActivityDetails() {
     fallbackActivities,
   );
 
-  if (loading) return <Loader full label="Loading activity…" />;
+  if (loading) return translateNode(<Loader full label="Loading activity…" />, translationLanguage);
 
   if (!activity) {
     return (
-      <div className="container-cso py-20">
+      translateNode(<div className="container-cso py-20">
         <EmptyState
           title="Activity not found"
           description="This activity may have been removed or the link may be incorrect."
@@ -33,14 +35,14 @@ export default function ActivityDetails() {
             </Link>
           }
         />
-      </div>
+      </div>, translationLanguage)
     );
   }
 
   const relatedItems = related.filter((item) => String(item.id) !== String(activity.id)).slice(0, 3);
 
   return (
-    <>
+    translateNode(<>
       <PageHero
         eyebrow={activity.category}
         title={activity.title}
@@ -123,6 +125,6 @@ export default function ActivityDetails() {
           </div>
         </section>
       )}
-    </>
+    </>, translationLanguage)
   );
 }

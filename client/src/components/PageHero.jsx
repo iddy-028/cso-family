@@ -1,9 +1,11 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 
 export default function PageHero({ eyebrow, title, description, image, breadcrumb }) {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <section className="relative isolate overflow-hidden bg-primary-950">
+    translateNode(<section className="relative isolate overflow-hidden bg-primary-950">
       {image && (
         <img
           src={image}
@@ -29,6 +31,6 @@ export default function PageHero({ eyebrow, title, description, image, breadcrum
           {description && <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">{description}</p>}
         </div>
       </div>
-    </section>
+    </section>, translationLanguage)
   );
 }

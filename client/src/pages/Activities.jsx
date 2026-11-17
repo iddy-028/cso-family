@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
 import PageHero from "../components/PageHero";
@@ -7,8 +8,11 @@ import EmptyState from "../components/EmptyState";
 import { activityCategories, fallbackActivities } from "../data/fallbackData";
 import { publicApi } from "../services/api";
 import useApiData from "../hooks/useApiData";
+import { useSiteContent } from "../context/SiteContentContext.jsx";
 
 export default function Activities() {
+  const translationLanguage = useTranslationLanguage().language;
+  const getContent = useSiteContent();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
@@ -38,11 +42,11 @@ export default function Activities() {
   const categories = ["", ...activityCategories];
 
   return (
-    <>
+    translateNode(<>
       <PageHero
-        eyebrow="Our activities"
-        title="Love in action"
-        description="Explore the ways CSO serves the community through visits, prayer, teaching, charity, and practical support."
+        eyebrow={getContent("activities.cso.hero.eyebrow", "CSO Family mission activities")}
+        title={getContent("activities.cso.hero.title", "CSO Family mission activities")}
+        description={getContent("activities.cso.hero.description", "Our mission includes hospital visits, student support for school fees and supplies, helping people in need, sharing God's Word, and encouraging those who need support.")}
         image="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1600&q=80"
         breadcrumb="Activities"
       />
@@ -90,7 +94,7 @@ export default function Activities() {
             <div className="mt-10">
               <EmptyState
                 title="No activities found"
-                description="Try a different search term or category. New activities will be published here."
+                description="Published CSO activity updates will appear here. See the About page for the full mission activities."
               />
             </div>
           ) : (
@@ -103,11 +107,11 @@ export default function Activities() {
 
           {error && (
             <p className="mt-8 text-center text-xs text-slate-400">
-              Showing sample content while the API is unavailable.
+              Activity updates are temporarily unavailable.
             </p>
           )}
         </div>
       </section>
-    </>
+    </>, translationLanguage)
   );
 }

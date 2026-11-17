@@ -1,15 +1,17 @@
 import "dotenv/config";
 import app from "./app.js";
 import { testConnection } from "./config/db.js";
+import { initializeContentSchema } from "./services/contentSchema.js";
 
 const port = Number(process.env.PORT || 5000);
 
 async function start() {
   try {
     await testConnection();
+    await initializeContentSchema();
     console.log("Database connection established.");
   } catch (error) {
-    console.error("\nCould not connect to MySQL.");
+    console.error("\nCould not connect to MySQL or initialize the CMS tables.");
     console.error(`  ${error.message}`);
     console.error("\nCheck server/.env and make sure the cso_database schema exists.");
     console.error("  Quick start with Docker: docker compose up -d");

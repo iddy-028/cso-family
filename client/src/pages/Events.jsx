@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { useMemo, useState } from "react";
 import { CalendarDays, Search } from "lucide-react";
 import PageHero from "../components/PageHero";
@@ -7,6 +8,7 @@ import EmptyState from "../components/EmptyState";
 import { fallbackEvents } from "../data/fallbackData";
 import { publicApi } from "../services/api";
 import useApiData from "../hooks/useApiData";
+import { useSiteContent } from "../context/SiteContentContext.jsx";
 
 const tabs = [
   { value: "upcoming", label: "Upcoming events" },
@@ -14,6 +16,8 @@ const tabs = [
 ];
 
 export default function Events() {
+  const translationLanguage = useTranslationLanguage().language;
+  const getContent = useSiteContent();
   const [status, setStatus] = useState("upcoming");
   const [search, setSearch] = useState("");
 
@@ -37,11 +41,11 @@ export default function Events() {
   );
 
   return (
-    <>
+    translateNode(<>
       <PageHero
-        eyebrow="Events"
-        title="Gather, pray, and serve"
-        description="Join CSO for prayer gatherings, volunteer orientations, community outreach, and other events."
+        eyebrow={getContent("events.cso.hero.eyebrow", "CSO Family events")}
+        title={getContent("events.cso.hero.title", "Official CSO Family events")}
+        description={getContent("events.cso.hero.description", "Events, dates, and locations will be shown here when they are officially published by CSO Family.")}
         image="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=80"
         breadcrumb="Events"
       />
@@ -85,7 +89,7 @@ export default function Events() {
               <EmptyState
                 icon={CalendarDays}
                 title={status === "upcoming" ? "No upcoming events" : "No past events to display"}
-                description="New events will be published here. You can also get involved and hear about upcoming gatherings."
+                description="Official CSO Family events will appear here when they are published."
               />
             </div>
           ) : (
@@ -98,11 +102,11 @@ export default function Events() {
 
           {error && (
             <p className="mt-8 text-center text-xs text-slate-400">
-              Showing sample content while the API is unavailable.
+              Event information is temporarily unavailable.
             </p>
           )}
         </div>
       </section>
-    </>
+    </>, translationLanguage)
   );
 }

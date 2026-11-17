@@ -1,15 +1,19 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { useMemo, useState } from "react";
-import { Images, Play, Search } from "lucide-react";
+import { Images, Search } from "lucide-react";
 import PageHero from "../components/PageHero";
 import GalleryGrid from "../components/GalleryGrid";
 import Loader from "../components/Loader";
 import EmptyState from "../components/EmptyState";
-import SectionHeading from "../components/SectionHeading";
 import { fallbackGallery, galleryCategories } from "../data/fallbackData";
 import { publicApi } from "../services/api";
 import useApiData from "../hooks/useApiData";
+import { useSiteContent } from "../context/SiteContentContext.jsx";
+import VideoGallerySection from "../sections/VideoGallerySection";
 
 export default function Gallery() {
+  const translationLanguage = useTranslationLanguage().language;
+  const getContent = useSiteContent();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
@@ -32,11 +36,11 @@ export default function Gallery() {
   const categories = ["", ...galleryCategories];
 
   return (
-    <>
+    translateNode(<>
       <PageHero
-        eyebrow="Gallery"
-        title="Stories captured in moments"
-        description="Photographs from CSO activities, prayer gatherings, community outreach, and time spent serving together."
+        eyebrow={getContent("gallery.cso.hero.eyebrow", "CSO Family gallery")}
+        title={getContent("gallery.cso.hero.title", "CSO Family photos and videos")}
+        description={getContent("gallery.cso.hero.description", "Photos and videos shared by CSO Family will appear here.")}
         image="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1600&q=80"
         breadcrumb="Gallery"
       />
@@ -80,7 +84,7 @@ export default function Gallery() {
               <EmptyState
                 icon={Images}
                 title="No photos found"
-                description="Try another category or search term. New photographs will be added after CSO activities."
+                description="CSO Family photos will appear here when they are uploaded."
               />
             </div>
           ) : (
@@ -91,32 +95,13 @@ export default function Gallery() {
 
           {error && (
             <p className="mt-8 text-center text-xs text-slate-400">
-              Showing sample content while the API is unavailable.
+              Gallery content is temporarily unavailable.
             </p>
           )}
         </div>
       </section>
 
-      <section className="section bg-white">
-        <div className="container-cso">
-          <SectionHeading
-            eyebrow="Video gallery"
-            title="Watch our story unfold."
-            description="Official CSO video highlights will be published here once provided by the organization. In the meantime, explore the photo gallery and upcoming events."
-          />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            {[1, 2].map((item) => (
-              <div key={item} className="relative flex aspect-video flex-col items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-slate-50 text-center">
-                <span className="grid h-16 w-16 place-items-center rounded-full bg-primary text-accent">
-                  <Play className="ml-1 h-7 w-7" />
-                </span>
-                <p className="mt-4 font-heading text-lg text-primary-950">Video highlight {item}</p>
-                <p className="mt-1 text-xs text-slate-400">Official video pending from CSO</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+      <VideoGallerySection />
+    </>, translationLanguage)
   );
 }

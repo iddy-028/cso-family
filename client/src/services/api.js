@@ -82,6 +82,8 @@ export const authApi = {
 };
 
 export const publicApi = {
+  content: () => api.get("/content").then((res) => res.data),
+  videos: () => api.get("/videos").then((res) => res.data),
   activities: (params) => api.get("/activities", { params }).then((res) => res.data),
   activity: (id) => api.get(`/activities/${id}`).then((res) => res.data),
   events: (params) => api.get("/events", { params }).then((res) => res.data),
@@ -94,6 +96,9 @@ export const publicApi = {
 
 export const adminApi = {
   stats: () => api.get("/stats").then((res) => res.data),
+  saveContent: (content) => api.put("/content", { content }).then((res) => res.data),
+  uploadVideo: (formData) => api.post("/videos", formData, { timeout: 0 }).then((res) => res.data),
+  deleteVideo: (id) => api.delete(`/videos/${id}`).then((res) => res.data),
 
   activities: (params) => api.get("/activities", { params }).then((res) => res.data),
   createActivity: (formData) => api.post("/activities", formData).then((res) => res.data),

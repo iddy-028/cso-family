@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../../context/LanguageContext.jsx";
 import { useState } from "react";
 import { CalendarDays, Pencil, Plus, Search, Trash2, Users } from "lucide-react";
 import { ErrorAlert, SuccessAlert } from "../../components/Alerts";
@@ -20,6 +21,7 @@ const emptyForm = {
 const eventStatuses = ["upcoming", "completed", "cancelled"];
 
 export default function AdminEvents() {
+  const translationLanguage = useTranslationLanguage().language;
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
   const { data, loading, error, refresh } = useApiData(
@@ -145,7 +147,7 @@ export default function AdminEvents() {
   }
 
   return (
-    <div className="space-y-5">
+    translateNode(<div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl text-primary-950">Events</h1>
@@ -415,6 +417,6 @@ export default function AdminEvents() {
           </div>
         )}
       </Modal>
-    </div>
+    </div>, translationLanguage)
   );
 }

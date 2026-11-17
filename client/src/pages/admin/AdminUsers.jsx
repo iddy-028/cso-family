@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../../context/LanguageContext.jsx";
 import { useState } from "react";
 import { Pencil, Plus, Search, Trash2, Users } from "lucide-react";
 import { ErrorAlert, SuccessAlert } from "../../components/Alerts";
@@ -21,6 +22,7 @@ const emptyForm = {
 };
 
 export default function AdminUsers() {
+  const translationLanguage = useTranslationLanguage().language;
   const { user: currentUser } = useAuth();
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("");
@@ -112,7 +114,7 @@ export default function AdminUsers() {
   }
 
   return (
-    <div className="space-y-5">
+    translateNode(<div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl text-primary-950">Users</h1>
@@ -295,6 +297,6 @@ export default function AdminUsers() {
           </div>
         </form>
       </Modal>
-    </div>
+    </div>, translationLanguage)
   );
 }

@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LogIn } from "lucide-react";
@@ -6,10 +7,12 @@ import { ErrorAlert } from "../components/Alerts";
 import { TextField } from "../components/FormFields";
 import { useAuth } from "../context/AuthContext";
 import { getErrorMessage } from "../services/api";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const initialForm = { email: "", password: "", remember: true };
 
 export default function Login() {
+  const translationLanguage = useTranslationLanguage().language;
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,7 +40,7 @@ export default function Login() {
   }
 
   return (
-    <div className="grid min-h-screen bg-slate-100 lg:grid-cols-2">
+    translateNode(<div className="grid min-h-screen bg-slate-100 lg:grid-cols-2">
       <div className="relative hidden overflow-hidden bg-primary-950 lg:block">
         <img
           src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=80"
@@ -63,6 +66,9 @@ export default function Login() {
 
       <div className="flex items-center justify-center bg-[radial-gradient(circle_at_top,_rgba(220,252,231,0.9),_rgba(255,255,255,0.98)_40%,_rgba(248,250,252,1)_100%)] px-5 py-12 sm:px-10">
         <div className="w-full max-w-md rounded-[30px] border border-emerald-100 bg-white/90 p-6 shadow-[0_25px_80px_-35px_rgba(20,83,45,0.45)] backdrop-blur sm:p-8">
+          <div className="flex justify-end">
+            <LanguageSwitcher />
+          </div>
           <div className="lg:hidden">
             <Logo />
           </div>
@@ -132,6 +138,6 @@ export default function Login() {
           </Link>
         </div>
       </div>
-    </div>
+    </div>, translationLanguage)
   );
 }

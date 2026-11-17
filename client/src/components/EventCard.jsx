@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, Users } from "lucide-react";
 import { resolveImage } from "../services/api";
@@ -10,8 +11,9 @@ const statusStyles = {
 };
 
 export default function EventCard({ event }) {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <article className="card card-hover group flex h-full flex-col overflow-hidden sm:flex-row">
+    translateNode(<article className="card card-hover group flex h-full flex-col overflow-hidden sm:flex-row">
       <div className="relative h-48 shrink-0 overflow-hidden bg-secondary sm:h-auto sm:w-52">
         {event.image ? (
           <img
@@ -54,6 +56,6 @@ export default function EventCard({ event }) {
           </Link>
         </div>
       </div>
-    </article>
+    </article>, translationLanguage)
   );
 }

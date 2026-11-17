@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { useEffect } from "react";
 import { X } from "lucide-react";
 
@@ -8,6 +9,7 @@ const sizes = {
 };
 
 export default function Modal({ open, onClose, title, description, children, footer, size = "md" }) {
+  const translationLanguage = useTranslationLanguage().language;
   useEffect(() => {
     if (!open) return undefined;
     const onKey = (event) => {
@@ -25,7 +27,7 @@ export default function Modal({ open, onClose, title, description, children, foo
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto p-4 sm:p-6" role="dialog" aria-modal="true">
+    translateNode(<div className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto p-4 sm:p-6" role="dialog" aria-modal="true">
       <button
         type="button"
         onClick={onClose}
@@ -50,6 +52,6 @@ export default function Modal({ open, onClose, title, description, children, foo
         <div className="px-6 py-5">{children}</div>
         {footer && <div className="flex flex-wrap justify-end gap-3 border-t border-slate-100 px-6 py-4">{footer}</div>}
       </div>
-    </div>
+    </div>, translationLanguage)
   );
 }

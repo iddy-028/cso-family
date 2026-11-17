@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../../context/LanguageContext.jsx";
 import { useState } from "react";
 import { Images, Pencil, Plus, Search, Trash2 } from "lucide-react";
 import EmptyState from "../../components/EmptyState";
@@ -12,6 +13,7 @@ import { adminApi, getErrorMessage, resolveImage } from "../../services/api";
 const emptyForm = { title: "", description: "", category: galleryCategories[0] };
 
 export default function AdminGallery() {
+  const translationLanguage = useTranslationLanguage().language;
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const { data, loading, error, refresh } = useApiData(
@@ -91,7 +93,7 @@ export default function AdminGallery() {
   }
 
   return (
-    <div className="space-y-5">
+    translateNode(<div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl text-primary-950">Gallery</h1>
@@ -236,6 +238,6 @@ export default function AdminGallery() {
           </div>
         </form>
       </Modal>
-    </div>
+    </div>, translationLanguage)
   );
 }

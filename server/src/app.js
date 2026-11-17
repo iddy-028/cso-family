@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import activityRoutes from "./routes/activityRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import contentRoutes from "./routes/contentRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import galleryRoutes from "./routes/galleryRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
@@ -13,6 +14,7 @@ import registrationRoutes from "./routes/registrationRoutes.js";
 import statsRoutes from "./routes/statsRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import volunteerRoutes from "./routes/volunteerRoutes.js";
+import videoRoutes from "./routes/videoRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import { uploadsDir } from "./utils/files.js";
 
@@ -44,19 +46,21 @@ app.get("/api/health", (req, res) => {
 
 app.get("/api", (req, res) => {
   res.json({
-    name: "CSO - Called to Serve Others API",
-    motto: "Serving God by Helping People.",
+    name: "CSO Family (Called to Serve Others) API",
+    motto: "Serving God by helping people.",
     version: "1.0.0",
   });
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/content", contentRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/activities", activityRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/registrations", registrationRoutes);
 app.use("/api/volunteers", volunteerRoutes);
 app.use("/api/gallery", galleryRoutes);
+app.use("/api/videos", videoRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/stats", statsRoutes);
 

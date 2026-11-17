@@ -1,11 +1,13 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { resolveImage } from "../services/api";
 import { formatDate } from "../utils/format";
 
 export default function ActivityCard({ activity }) {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <article className="card card-hover group flex h-full flex-col overflow-hidden">
+    translateNode(<article className="card card-hover group flex h-full flex-col overflow-hidden">
       <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
         {activity.image ? (
           <img
@@ -39,6 +41,6 @@ export default function ActivityCard({ activity }) {
           View Details <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
-    </article>
+    </article>, translationLanguage)
   );
 }

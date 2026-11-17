@@ -1,65 +1,76 @@
+import { translateNode, translateText, useLanguage as useTranslationLanguage } from "../context/LanguageContext.jsx";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, Eye, Flag, Target, UserRound } from "lucide-react";
+import { ArrowRight, CheckCircle2, Eye, Target } from "lucide-react";
 import PageHero from "../components/PageHero";
 import SectionHeading from "../components/SectionHeading";
-import { coreValues } from "../data/fallbackData";
-
-const goals = [
-  "Promote CSO and its Christian mission online.",
-  "Share information about the organization's activities.",
-  "Publish upcoming events and announcements.",
-  "Showcase community service through photographs.",
-  "Invite and register volunteers.",
-  "Improve communication between CSO and the community.",
-];
+import { useSiteContent } from "../context/SiteContentContext.jsx";
 
 export default function About() {
+  const translationLanguage = useTranslationLanguage().language;
+  const t = (value) => translateText(value, translationLanguage);
+  const getContent = useSiteContent();
+  const cms = (key, fallback) => getContent(key, t(fallback));
+  const missionItems = cms("about.family.mission.items", "")
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const strategies = cms("about.family.strategies.items", "")
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const principles = cms("about.family.principles.items", "")
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const memberRules = cms("about.family.rules.items", "")
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+
   return (
-    <>
+    translateNode(<>
       <PageHero
-        eyebrow="About CSO"
-        title="Called to Serve Others"
-        description="A Christian organization in Rwanda, serving God by helping people through community service, prayer, charity, and the Word of God."
+        eyebrow={cms("about.hero.eyebrow", "About CSO")}
+        title={cms("about.hero.title", "Called to Serve Others")}
+        description={cms("about.family.subtitle", "CSO Family (Called to Serve Others) is a family of students united by a mission to serve God by helping people.")}
         image="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80"
-        breadcrumb="About Us"
+        breadcrumb={t("About Us")}
       />
 
-      <section className="section bg-white">
+      <section className="section bg-[radial-gradient(circle_at_top,_rgba(220,252,231,0.7),_rgba(255,255,255,0.96)_35%,_rgba(248,250,252,1)_100%)]">
         <div className="container-cso grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <SectionHeading
-              eyebrow="Our identity"
-              title="A community called to reflect God's love."
-              description="CSO – Called to Serve Others exists to serve God by helping people. We believe faith is best expressed through action: caring for the sick, standing with vulnerable families, encouraging children, praying together, and sharing the hope of the Gospel."
+              eyebrow={cms("about.identity.eyebrow", "Our identity")}
+              title={cms("about.family.heading", "A family of students called to serve others.")}
+              description={cms("about.family.introduction", "CSO Family was founded by 15 students to serve God by helping people in need, sharing the Word of God, and doing other work to transform lives.")}
             />
             <p className="mt-5 body-muted">
-              Our work is rooted in the example of Christ, who came not to be served but to serve. Every activity is an
-              invitation to the community to experience God's love in a practical way.
+              {cms("about.family.summary", "Since its beginning, the family has continued to serve and grow with faith, unity, and God's help.")}
             </p>
-            <div className="mt-7 rounded-2xl border border-secondary bg-secondary/40 p-5">
-              <p className="text-sm font-semibold text-primary-900">Note about our history</p>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">
-                The organization's official history, founding details, contact information, and leadership names will
-                be published once verified by CSO leadership. This website currently uses clearly marked placeholders.
+            <div className="mt-7 rounded-[26px] border border-primary/10 bg-secondary/50 p-5 shadow-soft">
+              <p className="text-sm font-semibold text-primary-900">{cms("about.family.history.heading", "Our history")}</p>
+              <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-slate-600">
+                {cms("about.family.history.story", "CSO Family (Called to Serve Others) was founded on 29 June 2024 by 15 students.")}
               </p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img
               src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800&q=80"
-              alt="Volunteers serving the community"
+              alt={t("Volunteers serving the community")}
               className="col-span-2 aspect-[16/10] w-full rounded-3xl object-cover shadow-card"
               loading="lazy"
             />
             <img
               src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80"
-              alt="Children in the community"
+              alt={t("Children in the community")}
               className="aspect-square w-full rounded-3xl object-cover shadow-card"
               loading="lazy"
             />
             <img
               src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=600&q=80"
-              alt="Prayer and worship"
+              alt={t("Prayer and worship")}
               className="aspect-square w-full rounded-3xl object-cover shadow-card"
               loading="lazy"
             />
@@ -67,33 +78,37 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section bg-slate-50">
+      <section className="section bg-slate-50/80">
         <div className="container-cso">
           <SectionHeading
-            eyebrow="Mission & vision"
-            title="Why we serve."
-            description="Our mission and vision guide every activity, partnership, and act of service."
+            eyebrow={cms("about.family.mission.section.eyebrow", "Mission & vision")}
+            title={cms("about.family.mission.section.heading", "Serving God by helping people.")}
+            description={cms("about.family.mission.section.description", "CSO Family helps people in need, supports students, visits patients, shares the Word of God, and encourages people who need support.")}
             align="center"
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            <article className="card p-8">
-              <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary text-accent">
+            <article className="card border-primary/10 bg-gradient-to-br from-white to-emerald-50/70 p-8 shadow-soft">
+              <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary text-accent shadow-sm">
                 <Target className="h-7 w-7" />
               </span>
-              <h3 className="mt-5 font-heading text-2xl text-primary-950">Mission Statement</h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
-                To serve God by helping people through community service, Christian activities, charity, prayer, and
-                spreading the Word of God.
-              </p>
+              <h3 className="mt-5 font-heading text-2xl text-primary-950">{cms("about.family.mission.heading", "Mission of the CSO Family")}</h3>
+              <p className="mt-3 leading-relaxed text-slate-600">{cms("about.family.mission.introduction", "We serve God through practical care and support for people in need.")}</p>
+              <ul className="mt-5 space-y-3">
+                {missionItems.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-slate-600">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary-700" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </article>
-            <article className="card p-8">
-              <span className="grid h-14 w-14 place-items-center rounded-2xl bg-accent text-primary-950">
+            <article className="card border-primary/10 bg-gradient-to-br from-white to-amber-50/60 p-8 shadow-soft">
+              <span className="grid h-14 w-14 place-items-center rounded-2xl bg-accent text-primary-950 shadow-sm">
                 <Eye className="h-7 w-7" />
               </span>
-              <h3 className="mt-5 font-heading text-2xl text-primary-950">Vision Statement</h3>
+              <h3 className="mt-5 font-heading text-2xl text-primary-950">{cms("about.family.vision.heading", "Vision of the CSO Family")}</h3>
               <p className="mt-3 leading-relaxed text-slate-600">
-                A caring community where the love of God is seen in service, where vulnerable people find support, and
-                where faith is shared with compassion and unity.
+                {cms("about.family.vision.statement", "Serving God by helping people.")}
               </p>
             </article>
           </div>
@@ -101,77 +116,61 @@ export default function About() {
       </section>
 
       <section className="section bg-white">
-        <div className="container-cso">
-          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-            <SectionHeading
-              eyebrow="Core values"
-              title="The values that shape us."
-              description="These values guide how we serve God and how we treat every person we meet."
-            />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {coreValues.map((value, index) => (
-                <div
-                  key={value.title}
-                  className={`rounded-3xl p-6 ${index === 4 ? "bg-primary-950 text-white sm:col-span-2" : "bg-secondary/50"}`}
-                >
-                  <p className={`text-xs font-semibold uppercase tracking-[0.22em] ${index === 4 ? "text-accent" : "text-primary-700"}`}>
-                    0{index + 1}
-                  </p>
-                  <h3 className={`mt-3 font-heading text-xl ${index === 4 ? "text-white" : "text-primary-950"}`}>
-                    {value.title}
-                  </h3>
-                  <p className={`mt-2 text-sm leading-relaxed ${index === 4 ? "text-white/65" : "text-slate-600"}`}>
-                    {value.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-slate-50">
         <div className="container-cso grid gap-12 lg:grid-cols-2">
           <div>
-            <SectionHeading eyebrow="Our goals" title="What we are working toward." />
+            <SectionHeading
+              eyebrow={cms("about.family.strategies.label", "Our strategies")}
+              title={cms("about.family.strategies.heading", "How the family supports its mission.")}
+            />
             <ul className="mt-7 space-y-4">
-              {goals.map((goal) => (
-                <li key={goal} className="flex gap-3 text-sm leading-relaxed text-slate-600">
+              {strategies.map((strategy) => (
+                <li key={strategy} className="flex gap-3 text-sm leading-relaxed text-slate-600">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary-700" />
-                  {goal}
+                  {strategy}
                 </li>
               ))}
             </ul>
             <Link to="/get-involved" className="btn-primary mt-8">
-              Join the mission <ArrowRight className="h-4 w-4" />
+              {t("Join the mission")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
           <div>
-            <SectionHeading eyebrow="Leadership & team" title="The people behind the service." />
-            <div className="mt-7 space-y-4">
-              {[1, 2, 3].map((item) => (
-                <div key={item} className="flex items-center gap-4 rounded-2xl border border-dashed border-slate-300 bg-white/60 p-5">
-                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-secondary text-primary-700">
-                    <UserRound className="h-7 w-7" />
+            <SectionHeading
+              eyebrow={cms("about.family.principles.label", "Our principles")}
+              title={cms("about.family.principles.heading", "The principles that guide our family.")}
+            />
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              {principles.map((principle, index) => (
+                <div key={principle} className="flex items-center gap-3 rounded-2xl border border-primary/10 bg-secondary/50 p-4">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-primary text-xs font-semibold text-white">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                  <div>
-                    <p className="font-heading text-lg text-primary-950">Team member name pending verification</p>
-                    <p className="text-xs uppercase tracking-wider text-slate-400">Role and biography to be provided by CSO</p>
-                  </div>
+                  <p className="text-sm font-medium text-primary-950">{principle}</p>
                 </div>
               ))}
-            </div>
-            <div className="mt-5 flex items-start gap-3 rounded-2xl bg-accent/10 p-5 text-sm text-slate-600">
-              <Flag className="mt-0.5 h-5 w-5 shrink-0 text-accent-dark" />
-              <p>
-                CSO will provide verified leadership names, roles, photographs, and history. No official details have
-                been invented for this website.
-              </p>
             </div>
           </div>
         </div>
       </section>
-    </>
+
+      <section className="section bg-slate-50/80">
+        <div className="container-cso">
+          <SectionHeading
+            eyebrow={t("Our community")}
+            title={cms("about.family.rules.heading", "CSO Family member rules")}
+            align="center"
+          />
+          <ul className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">
+            {memberRules.map((rule, index) => (
+              <li key={`${index}-${rule}`} className="flex gap-3 rounded-2xl border border-primary/10 bg-white p-5 text-sm leading-relaxed text-slate-600 shadow-soft">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary-700" />
+                {rule}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </>, translationLanguage)
   );
 }

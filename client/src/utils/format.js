@@ -5,16 +5,21 @@ export function toDate(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+function getDateLocale() {
+  const language = typeof document === "undefined" ? "en" : document.documentElement.lang;
+  return { en: "en-GB", rw: "rw-RW", fr: "fr-FR" }[language] || "en-GB";
+}
+
 export function formatDate(value) {
   const date = toDate(value);
   if (!date) return "Date to be announced";
-  return date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  return date.toLocaleDateString(getDateLocale(), { day: "numeric", month: "long", year: "numeric" });
 }
 
 export function formatDateTime(value) {
   const date = toDate(value);
   if (!date) return "Date to be announced";
-  return date.toLocaleString("en-GB", {
+  return date.toLocaleString(getDateLocale(), {
     day: "numeric",
     month: "short",
     year: "numeric",
@@ -26,7 +31,7 @@ export function formatDateTime(value) {
 export function formatMonth(value) {
   const date = toDate(value);
   if (!date) return "";
-  return date.toLocaleDateString("en-GB", { month: "short" }).toUpperCase();
+  return date.toLocaleDateString(getDateLocale(), { month: "short" }).toUpperCase();
 }
 
 export function formatDay(value) {

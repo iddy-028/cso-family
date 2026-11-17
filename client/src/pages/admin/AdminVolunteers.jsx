@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "../../context/LanguageContext.jsx";
 import { useState } from "react";
 import { Eye, MapPin, Search, Trash2, Users } from "lucide-react";
 import EmptyState from "../../components/EmptyState";
@@ -17,6 +18,7 @@ function statusClass(status) {
 }
 
 export default function AdminVolunteers() {
+  const translationLanguage = useTranslationLanguage().language;
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   const { data, loading, error, refresh } = useApiData(
@@ -55,7 +57,7 @@ export default function AdminVolunteers() {
   }
 
   return (
-    <div className="space-y-5">
+    translateNode(<div className="space-y-5">
       <div>
         <h1 className="font-heading text-2xl text-primary-950">Volunteers</h1>
         <p className="mt-1 text-sm text-slate-500">Review volunteer applications and update their status.</p>
@@ -230,6 +232,6 @@ export default function AdminVolunteers() {
           </div>
         )}
       </Modal>
-    </div>
+    </div>, translationLanguage)
   );
 }

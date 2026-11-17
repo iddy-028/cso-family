@@ -1,3 +1,4 @@
+import { translateNode, useLanguage as useTranslationLanguage } from "./context/LanguageContext.jsx";
 import { Navigate, Route, Routes } from "react-router-dom";
 import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
@@ -20,12 +21,15 @@ import AdminVolunteers from "./pages/admin/AdminVolunteers";
 import AdminGallery from "./pages/admin/AdminGallery";
 import AdminMessages from "./pages/admin/AdminMessages";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminContent from "./pages/admin/AdminContent";
+import AdminVideos from "./pages/admin/AdminVideos";
 
 const staffRoles = ["admin", "staff"];
 
 export default function App() {
+  const translationLanguage = useTranslationLanguage().language;
   return (
-    <Routes>
+    translateNode(<Routes>
       <Route element={<PublicLayout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
@@ -55,6 +59,8 @@ export default function App() {
         <Route path="events" element={<AdminEvents />} />
         <Route path="volunteers" element={<AdminVolunteers />} />
         <Route path="gallery" element={<AdminGallery />} />
+        <Route path="videos" element={<AdminVideos />} />
+        <Route path="content" element={<ProtectedRoute roles={["admin"]}><AdminContent /></ProtectedRoute>} />
         <Route path="messages" element={<AdminMessages />} />
         <Route
           path="users"
@@ -65,6 +71,6 @@ export default function App() {
           }
         />
       </Route>
-    </Routes>
+    </Routes>, translationLanguage)
   );
 }
